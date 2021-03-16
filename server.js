@@ -11,18 +11,13 @@ try {
 const got = require('got');
 
 async function requestAndAnalyze(token, url) {
-
   const request = got(url, {
     headers: {
       'X-DCSS-MEDIA-REQUEST-TOKEN': token
     }
   });
-
-  console.log(request);
   const buffer = await request.buffer();
-
-
-  return buffer.length;
+  return buffer.length > 0;
 }
 
 const express = require('express');
@@ -80,8 +75,6 @@ io.on('connection', (socket) => {
     //
     // Send the response to the specified private
     // channel for this client socket connection.
-
-    const sentiment = agent.configuration.sentiment;
     const message = `Hello, I will analyze your media file. Press the <enter> key to make a remote request`;
     io.to(user.id).emit('interjection', { message });
   }

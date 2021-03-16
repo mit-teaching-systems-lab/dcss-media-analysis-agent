@@ -56,10 +56,8 @@ console.log('options', options);
 
 const socket = io(endpoint, options);
 
-const annotations = [];
-
 socket.on('response', ({value, result}) => {
-  console.log(`"${value}" ${result ? 'is' : 'is not'} negative.`);
+  console.log(`The buffer length of "${value}" ${result ? 'is' : 'is not'} greater than zero.`);
 });
 
 socket.on('interjection', ({message}) => {
